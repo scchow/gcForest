@@ -135,7 +135,7 @@ class gcForest(object):
         :return: np.array
             1D array containing the predicted class probabilities for each input sample.
         """
-        mgs_X = self.mg_scanning(X)
+        mgs_X = self.mg_scanning(X) if hasattr(self, "window") else X
         cascade_all_pred_prob = self.cascade_forest(mgs_X)
         predict_proba = np.mean(cascade_all_pred_prob, axis=0)
 
@@ -151,7 +151,7 @@ class gcForest(object):
         :return: np.array
             1D array containing the predicted class for each input sample.
         """
-        pred_proba = self.predict_proba(X=X)
+        pred_proba = self.predict_proba(X=X) if hasattr(self, "window") else X
         predictions = np.argmax(pred_proba, axis=1)
 
         return predictions

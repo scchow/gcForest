@@ -122,7 +122,7 @@ class gcForest(object):
         if np.shape(X)[0] != len(y):
             raise ValueError('Sizes of y and X do not match.')
 
-        mgs_X = self.mg_scanning(X, y)
+        mgs_X = self.mg_scanning(X, y) if hasattr(self, "window") else X
         _ = self.cascade_forest(mgs_X, y)
 
     def predict_proba(self, X):
@@ -151,7 +151,7 @@ class gcForest(object):
         :return: np.array
             1D array containing the predicted class for each input sample.
         """
-        pred_proba = self.predict_proba(X=X) if hasattr(self, "window") else X
+        pred_proba = self.predict_proba(X=X)
         predictions = np.argmax(pred_proba, axis=1)
 
         return predictions

@@ -172,7 +172,7 @@ class gcForest(object):
         shape_1X = getattr(self, 'shape_1X')
         if isinstance(shape_1X, int):
             shape_1X = [1,shape_1X]
-        if not getattr(self, 'window'):
+        if not hasattr(self, 'window'):
             setattr(self, 'window', [shape_1X[1]])
 
         mgs_pred_prob = []
